@@ -32,7 +32,6 @@ model User {
   normalized_email String
   password_hash    String
   last_access      DateTime      @db.Timestamptz(3)
-  status           Boolean
   pre_register_id  String?       @unique @db.Uuid
   Pre_register     Pre_Register? @relation(fields: [pre_register_id], references: [id])
 }

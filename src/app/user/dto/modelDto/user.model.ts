@@ -8,7 +8,6 @@ export class UserModel {
   normalized_email: string;
   password_hash: string;
   last_access: Date;
-  status: boolean;
   pre_register_id: string;
 }
 

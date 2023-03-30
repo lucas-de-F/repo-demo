@@ -3,7 +3,7 @@ import {
   Injectable,
   NestMiddleware,
 } from '@nestjs/common';
-import { Response, NextFunction, Request } from 'express';
+import { Response, NextFunction } from 'express';
 import { PreRegisterService } from 'src/app/pre-register/pre-register.service';
 import { UserService } from '../user.service';
 import { RequestBody, CreateUserSchema } from './joi';

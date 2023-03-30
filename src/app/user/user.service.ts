@@ -1,16 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { PreRegisterService } from '../pre-register/pre-register.service';
-import {
-  CreateUser,
-  LoginUserDto,
-  User,
-  UserWithPreRegister,
-} from './dto/serviceDto/user-service.dto';
-import {
-  CreateUserResponse,
-  UserWithPreRegisterResponse,
-} from './dto/serviceDto/user-service-response.dto';
+import { LoginUserDto, User } from './dto/serviceDto/user-service.dto';
+import { UserWithPreRegisterResponse } from './dto/serviceDto/user-service-response.dto';
 
 @Injectable()
 export class UserService {
@@ -22,20 +14,12 @@ export class UserService {
     Busca pré registro, e retorna UserResponse
     @param createUserDto: RequestUpdateUserDto
   */
-  async saveUser({
-    password,
-    email,
-  }: LoginUserDto): Promise<CreateUserResponse> {
+  async saveUser({ password, email }: LoginUserDto): Promise<void> {
     //  Acha Pre-Registro de usuário
     const { name, id } = await this.preRegisterService.findOneByEmail(email);
     //cria uma nova instancia de usuário
-    const findedUser: CreateUser = new CreateUser(name, email, password, id);
-    const user: UserWithPreRegister = await this.userRepository.create(
-      findedUser,
-    );
-    //cria uma nova instancia de usuário
-    const userResponse = new CreateUserResponse(user);
-    return userResponse;
+    const findedUser: User = new User(name, email, password, id);
+    await this.userRepository.create(findedUser);
   }
 
   async findOneByEmail(email: string): Promise<UserWithPreRegisterResponse> {
