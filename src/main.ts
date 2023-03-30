@@ -8,6 +8,7 @@ async function bootstrap() {
     cors: false,
   });
   app.enableCors();
+  app.setGlobalPrefix('api');
   // app.enableCors({
   //   origin: '*',
   //   allowedHeaders: '*',
