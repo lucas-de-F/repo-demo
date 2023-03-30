@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PreRegisterRepository } from './user.repository';
 import { UpdatePreRegisterResponse } from './dto/serviceDto/pre-register.dto';
-import {
-  CreatePreRegister,
-  PreRegister,
-} from './dto/modelDto/pre-register.dto';
+import { CreatePreRegister } from './dto/modelDto/pre-register.dto';
 
 @Injectable()
 export class PreRegisterService {
