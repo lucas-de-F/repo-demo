@@ -1,5 +1,4 @@
 import { CreatePreRegisterDto } from 'src/app/pre-register/dto/create-pre-register.dto';
-import { UserWithPreRegister } from './user-service.dto';
 
 export class UserWithPreRegisterResponse {
   name: string;
@@ -13,19 +12,18 @@ export class UserWithPreRegisterResponse {
   id: string;
   Pre_register: CreatePreRegisterDto;
 }
-export class CreateUserResponse {
+
+export class UserResponse {
   name: string;
   email: string;
   role_name: string;
+}
 
-  constructor(user: UserWithPreRegister) {
+export class CreateUserResponse extends UserResponse {
+  constructor(user: UserWithPreRegisterResponse) {
+    super();
     this.name = user.name;
     this.email = user.email;
     this.role_name = user.Pre_register.Role.name;
   }
-}
-export interface UserResponse {
-  name: string;
-  email: string;
-  role_name: string;
 }

@@ -1,23 +1,31 @@
+import {
+  User,
+  UserWithPreRegister,
+} from 'src/app/user/dto/serviceDto/user-service.dto';
+
 export class CreateLoginDto {
   email: string;
   password: string;
 }
 
 export class Token {
-  userId: string;
+  user_id: string;
   name: string;
-  email_active: string;
   email: string;
-  status: string;
   role_id: string;
   role: string;
-  constructor(userId, name, email, status, role_id, role) {
-    this.userId = userId;
-    this.name = name;
-    this.email_active = email;
+  constructor({
+    id: userId,
+    name: userName,
+    email,
+    Pre_register: {
+      Role: { name: roleName, id: roleId },
+    },
+  }: UserWithPreRegister) {
+    this.user_id = userId;
+    this.name = userName;
     this.email = email;
-    this.status = status;
-    this.role_id = role_id;
-    this.role = role;
+    this.role_id = roleId;
+    this.role = roleName;
   }
 }

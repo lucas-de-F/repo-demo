@@ -37,14 +37,7 @@ export class LoginService {
 
     if (!isHashTrue) throw new ForbiddenException('Senha inválida');
 
-    const tokenObj = new Token(
-      user.id,
-      user.name,
-      user.email,
-      user.status,
-      user.Pre_register.Role.id,
-      user.Pre_register.Role.name,
-    );
+    const tokenObj = new Token(user);
 
     var token = await this.JwtStrategy.signToken(tokenObj);
 

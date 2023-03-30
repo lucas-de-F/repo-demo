@@ -18,17 +18,9 @@ export class User {
   pre_register_id: string;
 }
 
-export class CreateUser {
-  name: string;
-  email: string;
-  normalized_name: string;
-  normalized_email: string;
-  password_hash: string;
-  last_access: Date;
-  status: boolean;
-  pre_register_id: string;
-
+export class CreateUser extends User {
   constructor(name: string, email: string, password: string, pre_register_id) {
+    super();
     const passwordHash = bcrypt.hashSync(password, 10);
 
     this.name = name;
@@ -41,15 +33,6 @@ export class CreateUser {
     this.status = true;
   }
 }
-export class UserWithPreRegister {
-  name: string;
-  email: string;
-  normalized_name: string;
-  normalized_email: string;
-  password_hash: string;
-  last_access: Date;
-  status: boolean;
-  pre_register_id: string;
-  id: string;
+export class UserWithPreRegister extends User {
   Pre_register: CreatePreRegisterDto;
 }
