@@ -3,16 +3,17 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
 } from '@nestjs/common';
 import { PreRegisterService } from './pre-register.service';
-import { CreatePreRegisterDto } from './dto/create-pre-register.dto';
-import { UpdatePreRegisterDto } from './dto/update-pre-register.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { UserService } from '../user/user.service';
+import {
+  CreatePreRegisterRequestDto,
+  UpdatePreRegisterRequestDto,
+} from './dto/controllerDto/pre-register.dto';
 
 @ApiTags('Pré Cadastro')
 @Controller('pre-register')
@@ -23,7 +24,7 @@ export class PreRegisterController {
   ) {}
 
   @Post()
-  create(@Body() createPreRegisterDto: CreatePreRegisterDto) {
+  create(@Body() createPreRegisterDto: CreatePreRegisterRequestDto) {
     return this.preRegisterService.savePreRegister(createPreRegisterDto);
   }
 
@@ -38,16 +39,16 @@ export class PreRegisterController {
   }
 
   @Put()
-  update(@Body() updatePreRegisterDto: UpdatePreRegisterDto) {
+  update(@Body() updatePreRegisterDto: UpdatePreRegisterRequestDto) {
     return this.preRegisterService.update(updatePreRegisterDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<void> {
     const user = await this.preRegisterService.findOne(id);
     if (user.User) {
       await this.userService.remove(user.User.id);
     }
-    return this.preRegisterService.remove(id);
+    this.preRegisterService.remove(id);
   }
 }

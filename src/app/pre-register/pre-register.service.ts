@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { CreatePreRegisterDto } from './dto/create-pre-register.dto';
-import { UpdatePreRegisterDto } from './dto/update-pre-register.dto';
 import { PreRegisterRepository } from './user.repository';
+import { UpdatePreRegisterResponse } from './dto/serviceDto/pre-register.dto';
+import {
+  CreatePreRegister,
+  PreRegister,
+} from './dto/modelDto/pre-register.dto';
 
 @Injectable()
 export class PreRegisterService {
   constructor(private preRegisterRepository: PreRegisterRepository) {}
-  async savePreRegister(createPreRegisterDto: CreatePreRegisterDto) {
+
+  async savePreRegister(createPreRegisterDto: CreatePreRegister) {
     const preRegister = await this.preRegisterRepository.create(
       createPreRegisterDto,
     );
@@ -25,7 +28,7 @@ export class PreRegisterService {
   findOneByEmail(email: string) {
     return this.preRegisterRepository.findOneByEmail(email);
   }
-  update(updatePreRegisterDto: UpdatePreRegisterDto) {
+  update(updatePreRegisterDto: UpdatePreRegisterResponse) {
     return this.preRegisterRepository.update(updatePreRegisterDto);
   }
 

@@ -1,4 +1,4 @@
-import { CreatePreRegisterDto } from 'src/app/pre-register/dto/create-pre-register.dto';
+import { CreatePreRegisterRequestDto } from 'src/app/pre-register/dto/controllerDto/pre-register.dto';
 
 export class UserModel {
   id: string;
@@ -12,5 +12,5 @@ export class UserModel {
 }
 
 export class UserModelWithPreRegister extends UserModel {
-  Pre_register: CreatePreRegisterDto;
+  Pre_register: CreatePreRegisterRequestDto;
 }

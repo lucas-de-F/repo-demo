@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { CreatePreRegisterDto } from 'src/app/pre-register/dto/create-pre-register.dto';
+import { CreatePreRegisterRequestDto } from 'src/app/pre-register/dto/controllerDto/pre-register.dto';
 
 export class LoginUserDto {
   email: string;
@@ -28,5 +28,5 @@ export class User {
   }
 }
 export class UserWithPreRegister extends User {
-  Pre_register: CreatePreRegisterDto;
+  Pre_register: CreatePreRegisterRequestDto;
 }
