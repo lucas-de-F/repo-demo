@@ -4,7 +4,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { UserService } from 'src/app/user/user.service';
-import { CreateLoginDto, Token } from './dto/login.dto';
+import { LoginRequest, Token } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import {
   User,
@@ -30,7 +30,7 @@ export class LoginService {
     };
   }
 
-  async checkPass(login: CreateLoginDto) {
+  async checkPass(login: LoginRequest) {
     const user = await this.getUser(login);
 
     const isHashTrue = await bcrypt.compare(login.password, user.password_hash);

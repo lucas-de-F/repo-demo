@@ -1,9 +1,9 @@
 import * as Joi from 'joi';
 import { Request } from 'express';
-import { LoginUserDto } from '../dto/controllerDto/user-controller.dto';
+import { RegisterUserRequest } from '../dto/controllerDto/user-controller.dto';
 
 export interface RequestBody extends Request {
-  body: LoginUserDto;
+  body: RegisterUserRequest;
 }
 
 export const RegisterSchema = Joi.object({

@@ -1,7 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { UserWithPreRegister } from 'src/app/user/dto/serviceDto/user-service.dto';
 
-export class CreateLoginDto {
+export class LoginRequest {
+  @ApiProperty()
   email: string;
+  @ApiProperty()
   password: string;
 }
 
