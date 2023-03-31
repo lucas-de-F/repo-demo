@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'prisma/prisma.service';
 import { Role } from './Dto/modelDto/role-model.dto';
+import { PrismaService } from 'src/infra/prisma/prisma.service';
 
 @Injectable()
 export class RoleRepository {

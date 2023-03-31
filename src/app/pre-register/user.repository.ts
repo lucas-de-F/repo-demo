@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'prisma/prisma.service';
 import {
   CreatePreRegister,
   PreRegister,
   UpdatePreRegister,
 } from './dto/modelDto/pre-register.dto';
+import { PrismaService } from 'src/infra/prisma/prisma.service';
 
 const include = { Role: true, User: true };
 
