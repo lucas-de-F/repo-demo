@@ -42,18 +42,6 @@ export class ValidateLoginMiddleware implements NestMiddleware {
         });
       }
     }
-    // if (req.method === 'PUT') {
-    //   try {
-    //     await updateUserSchema.validateAsync(req.body);
-    //   } catch ({ details }) {
-    //     throw new BadRequestException({
-    //       message: `dados inválidos`,
-    //       errorType: `${details[0].message}`,
-    //       statusCode: 400,
-    //       error: 'Bad Request',
-    //     });
-    //   }
-    // }
     next();
   }
 }

@@ -6,7 +6,7 @@ import {
 import { Response, NextFunction } from 'express';
 import { PreRegisterService } from 'src/app/pre-register/pre-register.service';
 import { UserService } from '../user.service';
-import { RequestBody, CreateUserSchema } from './joi';
+import { RequestBody, RegisterSchema } from './joi';
 
 @Injectable()
 export class ValidateUserMiddleware implements NestMiddleware {
@@ -17,15 +17,16 @@ export class ValidateUserMiddleware implements NestMiddleware {
   async use(req: RequestBody, res: Response, next: NextFunction) {
     if (req.method === 'POST') {
       try {
-        await CreateUserSchema.validateAsync(req.body);
+        await RegisterSchema.validateAsync(req.body);
       } catch ({ details }) {
         throw new BadRequestException({
           message: `dados inválidos`,
-          errorType: `${details[0].message}`,
+          errorType: `${details[0].context.name}`,
           statusCode: 400,
           error: 'Bad Request',
         });
       }
+
       try {
         const isOnPreRegister = await this.preRegisterService.findOneByEmail(
           req.body.email,

@@ -9,11 +9,6 @@ async function bootstrap() {
   });
   app.enableCors();
   app.setGlobalPrefix('api');
-  // app.enableCors({
-  //   origin: '*',
-  //   allowedHeaders: '*',
-  // });
-
   ConfigSwagger(app);
 
   await app.listen(process.env['PORT']);
