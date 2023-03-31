@@ -3,10 +3,9 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UserController } from './app/user/user.controller';
 import { UserRepository } from './app/user/user.repository';
 import { UserService } from './app/user/user.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configEnv/config';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { APP_GUARD } from '@nestjs/core';
 import { RoleController } from './app/role/role.controller';
 import { RoleService } from './app/role/role.service';
 import { RoleRepository } from './app/role/role.repository';
@@ -15,23 +14,30 @@ import { PreRegisterService } from './app/pre-register/pre-register.service';
 import { PreRegisterController } from './app/pre-register/pre-register.controller';
 import { AuthServiceModule } from './auth/auth-service/auth-service.module';
 import { JwtStrategy } from './auth/auth-service/strategy/jwtStrategy.service';
-import { JwtGuard } from './auth/auth-service/guards/jwtGuard.service';
-import { LoginController } from './auth/login/login.controller';
-import { LoginService } from './auth/login/login.service';
 import { MiddlewareResolver } from './middlwareResolve';
+import { LoginController } from './app/login/login.controller';
+import { LoginService } from './app/login/login.service';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtGuard } from './auth/auth-service/guards/jwtGuard.service';
 
 @Module({
   imports: [
     AuthServiceModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '24h' },
+        verifyOptions: { algorithms: ['HS256'] },
+      }),
+      inject: [ConfigService],
+    }),
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    JwtModule.register({
-      verifyOptions: { algorithms: ['HS256'] },
-      secret: process.env['JWT_SECRET'],
-      signOptions: { expiresIn: '24h' },
-    }),
   ],
+  exports: [JwtStrategy],
+
   controllers: [
     LoginController,
     PreRegisterController,
@@ -49,7 +55,11 @@ import { MiddlewareResolver } from './middlwareResolve';
     PrismaService,
     JwtStrategy,
     JwtService,
-    { provide: APP_GUARD, useClass: JwtGuard },
+    AuthServiceModule,
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
   ],
 })
 export class AppModule implements NestModule {

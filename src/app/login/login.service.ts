@@ -6,11 +6,11 @@ import {
 import { UserService } from 'src/app/user/user.service';
 import { CreateLoginDto, Token } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
-import { JwtStrategy } from '../auth-service/strategy/jwtStrategy.service';
 import {
   User,
   UserWithPreRegister,
 } from 'src/app/user/dto/serviceDto/user-service.dto';
+import { JwtStrategy } from 'src/auth/auth-service/strategy/jwtStrategy.service';
 
 @Injectable()
 export class LoginService {

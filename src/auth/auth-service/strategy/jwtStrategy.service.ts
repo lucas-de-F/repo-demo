@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
-import { Token } from 'src/auth/login/dto/login.dto';
+import { Token } from 'src/app/login/dto/login.dto';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -16,7 +16,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async signToken(paylaod: Token) {
-    console.log({ ...paylaod });
     return this.jwtService.sign(
       { ...paylaod },
       {

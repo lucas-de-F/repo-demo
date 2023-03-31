@@ -1,7 +1,4 @@
-import {
-  User,
-  UserWithPreRegister,
-} from 'src/app/user/dto/serviceDto/user-service.dto';
+import { UserWithPreRegister } from 'src/app/user/dto/serviceDto/user-service.dto';
 
 export class CreateLoginDto {
   email: string;

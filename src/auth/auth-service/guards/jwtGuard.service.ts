@@ -22,7 +22,6 @@ export class JwtGuard extends AuthGuard('jwt') {
   constructor(
     private reflector: Reflector,
     private readonly jwtService: JwtService,
-    private readonly jwtStrategy: JwtStrategy,
   ) {
     super();
   }
