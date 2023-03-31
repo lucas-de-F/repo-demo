@@ -8,10 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { PreRegisterService } from './pre-register.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from '../user/user.service';
 import {
-  CreatePreRegisterRequestDto,
+  CreatePreRegisterRequest,
+  PreRegisterResponse,
   UpdatePreRegisterRequestDto,
 } from './dto/controllerDto/pre-register.dto';
 
@@ -24,22 +25,30 @@ export class PreRegisterController {
   ) {}
 
   @Post()
-  create(@Body() createPreRegisterDto: CreatePreRegisterRequestDto) {
+  @ApiResponse({ type: PreRegisterResponse })
+  create(
+    @Body() createPreRegisterDto: CreatePreRegisterRequest,
+  ): Promise<PreRegisterResponse> {
     return this.preRegisterService.savePreRegister(createPreRegisterDto);
   }
 
   @Get()
-  findAll() {
+  @ApiResponse({ type: [PreRegisterResponse] })
+  findAll(): Promise<PreRegisterResponse[]> {
     return this.preRegisterService.findAll();
   }
 
+  @ApiResponse({ type: PreRegisterResponse })
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<PreRegisterResponse> {
     return this.preRegisterService.findOne(id);
   }
 
   @Put()
-  update(@Body() updatePreRegisterDto: UpdatePreRegisterRequestDto) {
+  @ApiResponse({ type: PreRegisterResponse })
+  update(
+    @Body() updatePreRegisterDto: UpdatePreRegisterRequestDto,
+  ): Promise<PreRegisterResponse> {
     return this.preRegisterService.update(updatePreRegisterDto);
   }
 

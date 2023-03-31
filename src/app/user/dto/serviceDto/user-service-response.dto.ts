@@ -1,4 +1,4 @@
-import { CreatePreRegisterRequestDto } from 'src/app/pre-register/dto/controllerDto/pre-register.dto';
+import { CreatePreRegisterRequestDto } from './user-service.dto';
 
 export class UserWithPreRegisterResponse {
   name: string;

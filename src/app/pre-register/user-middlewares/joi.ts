@@ -1,11 +1,11 @@
 import * as Joi from 'joi';
 import { Request } from 'express';
 import {
-  CreatePreRegisterRequestDto,
+  CreatePreRegisterRequest,
   UpdatePreRegisterRequestDto,
 } from '../dto/controllerDto/pre-register.dto';
 
-export const userSchema = Joi.object<CreatePreRegisterRequestDto>({
+export const userSchema = Joi.object<CreatePreRegisterRequest>({
   email: Joi.string().required(),
   identification: Joi.string().allow('', null),
   name: Joi.string().required(),
@@ -21,5 +21,5 @@ export const updateUserSchema = Joi.object<UpdatePreRegisterRequestDto>({
 });
 
 export interface RequestBody extends Request {
-  body: CreatePreRegisterRequestDto;
+  body: CreatePreRegisterRequest;
 }

@@ -1,9 +1,23 @@
+import { ApiProperty } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';
-import { CreatePreRegisterRequestDto } from 'src/app/pre-register/dto/controllerDto/pre-register.dto';
+import { RoleResponse } from 'src/app/role/Dto/controllerDto/role-controller.dto';
 
 export class LoginUserDto {
   email: string;
   password: string;
+}
+
+export class CreatePreRegisterRequestDto {
+  @ApiProperty()
+  name: string;
+  @ApiProperty()
+  email: string;
+  @ApiProperty()
+  identification: string;
+  @ApiProperty()
+  role_id: string;
+  @ApiProperty()
+  Role?: RoleResponse;
 }
 
 export class User {
