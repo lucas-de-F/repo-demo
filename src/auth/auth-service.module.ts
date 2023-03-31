@@ -1,12 +1,12 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { JwtStrategy } from './strategy/jwtStrategy.service';
-import { RoleGuard } from './strategy/jwtCheckRole.service';
-import { PrismaService } from 'prisma/prisma.service';
+import { Module } from '@nestjs/common';
+import { RoleGuard } from './guards/jwtCheckRole.guard';
 import { UserService } from 'src/app/user/user.service';
 import { UserRepository } from 'src/app/user/user.repository';
-import { MiddlewareResolver } from './middlwareResolve';
 import { PreRegisterService } from 'src/app/pre-register/pre-register.service';
 import { PreRegisterRepository } from 'src/app/pre-register/user.repository';
+import { JwtService } from '@nestjs/jwt';
+import { JwtStrategy } from './jwtService/jwtStrategy.service';
+import { PrismaService } from 'src/infra/prisma/prisma.service';
 
 @Module({
   providers: [
@@ -15,14 +15,10 @@ import { PreRegisterRepository } from 'src/app/pre-register/user.repository';
     PreRegisterService,
     PreRegisterRepository,
     JwtStrategy,
+    JwtService,
     RoleGuard,
     PrismaService,
-    JwtStrategy,
   ],
+  exports: [JwtStrategy, JwtService, PrismaService],
 })
-export class ApplicationModulesModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    MiddlewareResolver(consumer);
-  }
-}
 export class AuthServiceModule {}

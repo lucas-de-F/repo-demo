@@ -1,21 +1,9 @@
-import { Injectable, SetMetadata } from '@nestjs/common';
-import { ExecutionContext, NestMiddleware } from '@nestjs/common/interfaces';
+import { Injectable } from '@nestjs/common';
+import { ExecutionContext } from '@nestjs/common/interfaces';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtStrategy } from '../strategy/jwtStrategy.service';
-import * as jwt from 'jsonwebtoken';
-
-export const BYPASS_KEY = 'bypass';
-export const BypassAuth = () => {
-  return SetMetadata(BYPASS_KEY, true);
-};
-export const shouldBypassAuth = (
-  context: ExecutionContext,
-  reflector: Reflector,
-): boolean => {
-  return reflector.get(BYPASS_KEY, context.getHandler());
-};
+import { shouldBypassAuth } from '../rolesDecorator';
 
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {
