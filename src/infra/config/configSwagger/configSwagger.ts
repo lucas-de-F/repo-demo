@@ -3,8 +3,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 export function ConfigSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('Active Go')
-    .setDescription('Software de gestão interna da Active Bi')
+    .setTitle('App demo')
+    .setDescription('Aplicativo demo')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

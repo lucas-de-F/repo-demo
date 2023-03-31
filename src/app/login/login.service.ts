@@ -10,13 +10,13 @@ import {
   User,
   UserWithPreRegister,
 } from 'src/app/user/dto/serviceDto/user-service.dto';
-import { JwtStrategy } from 'src/auth/auth-service/strategy/jwtStrategy.service';
+import { JwtStrategy } from 'src/auth/jwtService/jwtStrategy.service';
 
 @Injectable()
 export class LoginService {
   constructor(
     private userService: UserService,
-    private JwtStrategy: JwtStrategy,
+    private jwtStrategy: JwtStrategy,
   ) {}
   async getUser(login) {
     const user: UserWithPreRegister = await this.userService.findOneByEmail(
@@ -39,10 +39,10 @@ export class LoginService {
 
     const tokenObj = new Token(user);
 
-    var token = await this.JwtStrategy.signToken(tokenObj);
+    const token = await this.jwtStrategy.signToken(tokenObj);
 
     delete user.Pre_register;
-    await this.setLastAccess(user as User);
+    this.setLastAccess(user as User);
 
     return { token };
   }

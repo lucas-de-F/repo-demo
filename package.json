@@ -6,12 +6,13 @@
   "private": true,
   "license": "UNLICENSED",
   "prisma": {
-    "seed": "ts-node prisma/seed.ts",
-    "migrate-prod": "dotenv -e .env.production npx prisma migrate dev"
+    "schema": "src/infra/prisma/schema.prisma"
   },
   "scripts": {
-    "build": " npm run generate && nest build",
+    "seed": "ts-node ./src/infra/prisma/seed.ts",
+    "migrate-dev": "npx prisma migrate dev --schema ./src/infra/prisma/schema.prisma",
     "generate": "npx prisma generate",
+    "build": " npm run generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
