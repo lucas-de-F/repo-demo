@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserModel, UserModelWithPreRegister } from './dto/modelDto/user.model';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { PrismaService } from '../../infra/prisma/prisma.service';
 
 const include = { Pre_register: { include: { Role: true } } };
 

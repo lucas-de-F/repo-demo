@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';
-import { RoleResponse } from 'src/app/role/Dto/controllerDto/role-controller.dto';
+import { RoleResponse } from '../../../role/Dto/controllerDto/role-controller.dto';
 
 export class LoginUserDto {
   email: string;

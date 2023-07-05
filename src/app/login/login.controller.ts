@@ -2,7 +2,7 @@ import { Body, Controller, UnauthorizedException, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginRequest } from './dto/login.dto';
 import { LoginService } from './login.service';
-import { BypassAuth } from 'src/auth/rolesDecorator';
+import { BypassAuth } from '../../auth/rolesDecorator';
 
 @ApiTags('Login')
 @Controller('login')

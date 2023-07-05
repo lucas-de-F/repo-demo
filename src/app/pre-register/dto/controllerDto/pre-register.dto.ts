@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { RoleResponse } from 'src/app/role/Dto/controllerDto/role-controller.dto';
-import { UserResponse } from 'src/app/user/dto/controllerDto/user-controller.dto';
+import { RoleResponse } from '../../../role/Dto/controllerDto/role-controller.dto';
+import { UserResponse } from '../../../user/dto/controllerDto/user-controller.dto';
 
 export class CreatePreRegisterRequest {
   @ApiProperty()

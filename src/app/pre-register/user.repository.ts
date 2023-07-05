@@ -4,7 +4,7 @@ import {
   PreRegister,
   UpdatePreRegister,
 } from './dto/modelDto/pre-register.dto';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { PrismaService } from '../../infra/prisma/prisma.service';
 
 const include = { Role: true, User: true };
 

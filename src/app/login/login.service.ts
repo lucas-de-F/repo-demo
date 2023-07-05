@@ -3,14 +3,14 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
-import { UserService } from 'src/app/user/user.service';
 import { LoginRequest, Token } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import {
   User,
   UserWithPreRegister,
 } from 'src/app/user/dto/serviceDto/user-service.dto';
-import { JwtStrategy } from 'src/auth/jwtService/jwtStrategy.service';
+import { UserService } from '../user/user.service';
+import { JwtStrategy } from '../../auth/jwtService/jwtStrategy.service';
 
 @Injectable()
 export class LoginService {
